@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+videos/.gitkeep
+*.log
+.idea/
+.vscode/

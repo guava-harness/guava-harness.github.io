@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guava: Effective and General Harness for Embodied Manipulation</title>
+<meta name="description" content="Guava is a harness framework for embodied tool use, identifying three key ingredients for effective embodied agents and distilling them into a compact 4B model with fewer than 2K simulation trajectories." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><span class="brand-mark"></span>Guava</a>
+    <nav class="topnav">
+      <a href="#overview">Overview</a>
+      <a href="#ingredients">Harness</a>
+      <a href="#distillation">4B Model</a>
+      <a href="#results">Results</a>
+      <a href="#references">References</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <p class="eyebrow">A Harness Framework for Embodied Manipulation</p>
+    <h1 class="title">Guava: Effective and General Harness for Embodied Manipulation</h1>
+
+    <div class="authors">
+      <span class="author"><a href="https://hdacnw.github.io/" target="_blank" rel="noopener">Haowen Liu</a><sup>1,*</sup></span>
+      <span class="author"><a href="https://xirui-li.github.io/" target="_blank" rel="noopener">Xirui Li</a><sup>1,*</sup></span>
+      <span class="author"><a href="https://shaoxiongyao.github.io/" target="_blank" rel="noopener">Shaoxiong Yao</a><sup>2</sup></span>
+      <span class="author"><a href="https://scholar.google.com/citations?user=XTbDLrkAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Peng Shi</a><sup>3</sup></span>
+      <span class="author"><a href="https://tianyizhou.github.io/" target="_blank" rel="noopener">Tianyi Zhou</a><sup>4</sup></span>
+      <span class="author"><a href="https://jbhuang0604.github.io/" target="_blank" rel="noopener">Jia-Bin Huang</a><sup>1</sup></span>
+      <span class="author"><a href="https://furong-huang.com/" target="_blank" rel="noopener">Furong Huang</a><sup>1</sup></span>
+      <span class="author"><a href="https://jiayuanm.com/" target="_blank" rel="noopener">Jiayuan Mao</a><sup>5,6</sup></span>
+    </div>
+    <div class="affiliations">
+      <span><sup>1</sup> University of Maryland, College Park</span>
+      <span><sup>2</sup> University of Illinois Urbana-Champaign</span>
+      <span><sup>3</sup> University of Waterloo</span>
+      <span><sup>4</sup> Mohamed bin Zayed University of Artificial Intelligence</span>
+      <span><sup>5</sup> University of Pennsylvania</span>
+      <span><sup>6</sup> Amazon FAR</span>
+    </div>
+    <p class="contribution"><sup>*</sup> Equal contribution</p>
+
+    <div class="hero-buttons">
+      <a class="btn btn-primary" href="#" aria-disabled="true">
+        <span class="btn-ico">PDF</span> Paper
+      </a>
+      <a class="btn" href="#" aria-disabled="true">
+        <span class="btn-ico">arX</span> arXiv
+      </a>
+      <a class="btn" href="#" aria-disabled="true">
+        <span class="btn-ico">{ }</span> Code
+      </a>
+      <a class="btn" href="#" aria-disabled="true">
+        <span class="btn-ico">▶</span> Video
+      </a>
+    </div>
+
+    <figure class="media hero-figure">
+      <img src="images/teaser.png" alt="Guava overview: harness-based embodied agent that uses tools for perception, planning, and control." />
+      <figcaption>
+        <strong>Guava overview.</strong> A harness combining iterative reasoning, semantic tools, and multimodal observations distills frontier-VLM capabilities into a compact 4B model deployable zero-shot in the real world.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="overview" class="section">
+    <h2 class="section-title">Overview</h2>
+    <div class="lede">
+      <p>
+        We present <strong>Guava</strong>, a harness framework for embodied tool use. Through systematic exploration of the design space, we identify three key ingredients of an effective harness: <mark>iterative perception–reasoning–action loops</mark>, <mark>semantic action abstractions</mark>, and <mark>multimodal observations</mark>. Using this harness, we distill embodied manipulation into a <strong>4B open-source model</strong> with <strong>fewer than 2K simulation trajectories</strong> — matching frontier proprietary models in both simulation and the real world, with strong <strong>zero-shot generalization</strong> to unseen objects, novel instructions, and long-horizon tasks.
+      </p>
+    </div>
+
+    <!-- Optional hero video — drop the file in and unhide the figure.
+    <figure class="media">
+      <video src="videos/overview.mp4" autoplay loop muted playsinline poster="images/teaser.png"></video>
+      <figcaption><strong>Project video.</strong> 60-second overview.</figcaption>
+    </figure>
+    -->
+  </section>
+
+  <section id="ingredients" class="section">
+    <h2 class="section-title">Ingredients for an effective harness</h2>
+    <p class="section-lead">
+      By exploring the design space of agent workflows, action spaces, and observation spaces, we converge on three principles that consistently matter for embodied manipulation.
+    </p>
+
+    <ol class="principles">
+      <li>
+        <p class="p-title">Iterative perception–reasoning–action loops</p>
+        <p>ReAct-style loops<sup><a class="cite" href="#ref-1">[1]</a></sup> let the agent adapt to execution outcomes and recover from failures, rather than committing to a single open-loop plan.</p>
+      </li>
+      <li>
+        <p class="p-title">Semantic action abstractions</p>
+        <p>Tools that encapsulate manipulation skills at a semantic level free the language model to focus on task decomposition and planning instead of low-level control.</p>
+      </li>
+      <li>
+        <p class="p-title">Multimodal observations</p>
+        <p>Rich visual and structured observations provide the environmental context that embodied reasoning requires.</p>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <p class="kicker">Takeaway</p>
+      <p>Existing harness systems often rely on one-shot code generation, domain-specific pipelines, and powerful frontier models, which makes robust long-horizon behavior and failure recovery expensive and brittle. Guava reframes the design problem around three reusable ingredients.</p>
+    </div>
+  </section>
+
+  <section id="distillation" class="section">
+    <h2 class="section-title">General harness on a 4B model</h2>
+    <p class="section-lead">
+      Building on these principles, we ask whether an effective harness can serve as a general interface for embodied manipulation across model scales — including small open-source ones. We distill embodied tool-use behaviors into <strong>Qwen3.5-4B</strong><sup><a class="cite" href="#ref-2">[2]</a></sup> using fewer than <strong>2K trajectories</strong> collected entirely in simulation with Robosuite<sup><a class="cite" href="#ref-3">[3]</a></sup>. Training is two-stage: supervised fine-tuning followed by GRPO<sup><a class="cite" href="#ref-4">[4]</a></sup> on long-horizon tasks.
+    </p>
+
+    <div class="media-row two">
+      <figure class="media">
+        <img src="images/data_engine.png" alt="Data generation pipeline: simulation environment, a frontier VLM, and the resulting reasoning + tool-call traces." />
+        <figcaption>
+          <strong>Data engine.</strong> Randomized simulation scenes plus error perturbations are paired with a frontier VLM. The pipeline yields interleaved reasoning and tool-call traces used to distill the 4B student model.
+        </figcaption>
+      </figure>
+      <figure class="media">
+        <img src="images/task_types.png" alt="Composition of the training trajectories across task types." />
+        <figcaption>
+          <strong>Trajectory mix.</strong> 1,934 simulation trajectories span pick-and-place, push, drawer, remove, find, and arrange tasks — a deliberately small, diverse seed.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="results" class="section">
+    <h2 class="section-title">Results</h2>
+    <p class="section-lead">
+      Across simulation and real-world environments, the distilled model reaches performance comparable to frontier proprietary models. In simulation, <strong>Guava-Agent-4B</strong> achieves the highest overall success rate (75.6%), outperforming GPT-5.4<sup><a class="cite" href="#ref-5">[5]</a></sup> (70.2%) and CaP-Agent0<sup><a class="cite" href="#ref-6">[6]</a></sup> (62.7%).
+    </p>
+
+    <figure class="media">
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption><strong>Table 1.</strong> Simulation success rates (%) averaged across all tasks within each category. <strong>Bold</strong> marks the best per row.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">CaP-Agent0</th>
+              <th scope="col">Qwen3.5-4B</th>
+              <th scope="col">GPT-5.4</th>
+              <th scope="col" class="ours">Guava-Agent-4B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">In-distribution</th><td>58.9</td><td>16.0</td><td>61.3</td><td class="ours"><strong>82.7</strong></td></tr>
+            <tr><th scope="row">OOD object</th><td>76.7</td><td>40.0</td><td>78.4</td><td class="ours"><strong>90.0</strong></td></tr>
+            <tr><th scope="row">OOD prompt</th><td>53.4</td><td>16.7</td><td>63.4</td><td class="ours"><strong>83.4</strong></td></tr>
+            <tr><th scope="row">OOD long horizon</th><td>58.3</td><td>18.3</td><td><strong>76.7</strong></td><td class="ours">48.3</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><th scope="row">Overall</th><td>62.7</td><td>23.1</td><td>70.2</td><td class="ours"><strong>75.6</strong></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </figure>
+
+    <h3 class="sub-title">Zero-shot transfer to the real world</h3>
+    <p>The same 4B model holds onto its lead across both in-distribution and OOD real-world tasks, with no real-world training data.</p>
+
+    <figure class="media">
+      <img src="images/real_world_comparison.png" alt="Bar chart comparing guava-agent-4b against CaP-Agent0, GPT 5.4, and Qwen3.5-4B on in-distribution and out-of-distribution real-world tasks." />
+      <figcaption>
+        <strong>Real-world success rates.</strong> The 4B Guava agent matches or beats frontier proprietary models in average success across both in-distribution and OOD tasks, while running on a compact open-source backbone.
+      </figcaption>
+    </figure>
+
+    <h3 class="sub-title">Qualitative rollouts</h3>
+    <p>Representative tasks executed zero-shot on a physical setup. The same 4B agent generalizes across multi-step rearrangement, sorting, and pushing.</p>
+
+    <div class="video-grid three">
+      <figure class="media">
+        <video src="videos/set_table.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>set the table</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/sort.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>separate the objects</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/arrange_by_size.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>sort by size</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/red_objects.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>place all red objects in basket</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/remove_cube.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>remove cube from tray</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/push_basket.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>push basket to the left</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="sub-title">More tasks</h3>
+    <p>Additional in-distribution and out-of-distribution rollouts the same agent handles zero-shot in the real world.</p>
+    <div class="video-grid three">
+      <figure class="media">
+        <video src="videos/pick_orange.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>pick up orange</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/close_drawer.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>close drawer</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/move_away.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>move object away</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/stack_cube.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>stack cube (reverse order)</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/arrange_three.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>arrange three by size</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/shell_game.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>shell game</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="sub-title">Closed-loop reasoning &amp; failure recovery</h3>
+    <p>
+      Compared with one-shot planners like CaP-Agent0, Guava interleaves observation, reasoning, and tool execution on every step — so when something goes wrong, the agent can <em>see</em> it and revise instead of restarting the script.
+    </p>
+
+    <figure class="media">
+      <img src="images/reasoning.png" alt="Trace of the Guava agent reasoning about picking up a carrot, calling tools, and recovering after a missed grasp." />
+      <figcaption>
+        <strong>Reasoning &amp; tool-call trajectory.</strong> The agent interleaves <em>thinking</em>, tool calls (<code>align</code>, <code>grasp</code>, <code>release</code>, <code>move</code>), and visual feedback. When a grasp misses, it diagnoses the failure and re-plans rather than restarting.
+      </figcaption>
+    </figure>
+
+    <figure class="media">
+      <img src="images/recovery_example.png" alt="Detailed recovery trace where a human perturbs the scene and the agent re-aligns and retries." />
+      <figcaption>
+        <strong>Failure recovery beyond training.</strong> When a human manually displaces the target mid-rollout, the agent detects the missed grasp, releases, re-aligns, and completes the task — emergent behavior the harness encourages.
+      </figcaption>
+    </figure>
+
+    <div class="video-compare">
+      <figure class="media">
+        <video src="videos/recovery_move.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>Human-induced perturbation</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/recovery_control.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>Control-failure recovery</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="references" class="section">
+    <h2 class="section-title">References</h2>
+    <ol class="reflist">
+      <li id="ref-1">
+        Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao. <em>ReAct: Synergizing Reasoning and Acting in Language Models.</em> ICLR 2023.
+        <a class="ref-link" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">arXiv:2210.03629</a>
+      </li>
+      <li id="ref-2">
+        Qwen Team. <em>Qwen3.5: Towards Native Multimodal Agents.</em> 2026.
+        <a class="ref-link" href="https://qwen.ai/blog?id=qwen3.5" target="_blank" rel="noopener">qwen.ai/blog</a>
+      </li>
+      <li id="ref-3">
+        Yuke Zhu, Josiah Wong, Ajay Mandlekar, Roberto Martín-Martín, Abhishek Joshi, Soroush Nasiriany, Yifeng Zhu, Kevin Lin. <em>robosuite: A Modular Simulation Framework and Benchmark for Robot Learning.</em> 2020.
+        <a class="ref-link" href="https://arxiv.org/abs/2009.12293" target="_blank" rel="noopener">arXiv:2009.12293</a>
+      </li>
+      <li id="ref-4">
+        Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, Y.K. Li, Y. Wu, Daya Guo. <em>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.</em> 2024.
+        <a class="ref-link" href="https://arxiv.org/abs/2402.03300" target="_blank" rel="noopener">arXiv:2402.03300</a>
+      </li>
+      <li id="ref-5">
+        OpenAI. <em>Introducing GPT-5.4.</em> 2026.
+        <a class="ref-link" href="https://openai.com/index/introducing-gpt-5-4/" target="_blank" rel="noopener">openai.com</a>
+      </li>
+      <li id="ref-6">
+        Max Fu, Justin Yu, Karim El-Refai, Ethan Kou, Haoru Xue, Huang Huang, Wenli Xiao, Guanzhi Wang, Fei-Fei Li, Guanya Shi, Jiajun Wu, Shankar Sastry, Yuke Zhu, Ken Goldberg, Linxi "Jim" Fan. <em>CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation.</em> 2026.
+        <a class="ref-link" href="https://arxiv.org/abs/2603.22435" target="_blank" rel="noopener">arXiv:2603.22435</a>
+      </li>
+    </ol>
+  </section>
+
+  <section id="bibtex" class="section">
+    <h2 class="section-title">BibTeX</h2>
+    <div class="placeholder">
+      <p class="kicker">Citation</p>
+      <p>BibTeX will be added once the paper is published.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 The Guava Team</p>
+</footer>
+
+<script>
+  // Highlight the current section in the top nav as the user scrolls.
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const navLinks = new Map(
+    Array.from(document.querySelectorAll('.topnav a')).map(a => [a.getAttribute('href').slice(1), a])
+  );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = navLinks.get(entry.target.id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
