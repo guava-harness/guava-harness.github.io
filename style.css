@@ -221,6 +221,22 @@ a:hover { border-bottom-color: var(--accent); }
   background: #235f3e;
   border-bottom-color: #235f3e;
 }
+.btn-arxiv {
+  background: #c1de79;
+  color: var(--ink);
+  border-color: #c1de79;
+  border-bottom-color: #c1de79;
+}
+.btn-arxiv:hover {
+  background: #aecc65;
+  color: var(--ink);
+  border-color: #aecc65;
+  border-bottom-color: #aecc65;
+}
+.btn-arxiv .btn-ico {
+  background: rgba(20, 22, 26, 0.12);
+  color: var(--ink);
+}
 .btn[aria-disabled="true"] {
   opacity: 0.55;
   pointer-events: none;
