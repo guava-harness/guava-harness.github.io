@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Guava: Effective and General Harness for Embodied Manipulation</title>
+<title>Guava: Effective and Universal Harness for Embodied Manipulation</title>
 <link rel="icon" type="image/png" href="images/red-guavas.png" />
 <meta name="description" content="Guava is a harness framework for embodied tool use, identifying three key ingredients for effective embodied agents and distilling them into a compact 4B model with fewer than 2K simulation trajectories." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,25 +52,22 @@
     <p class="contribution"><sup>*</sup> Equal contribution</p>
 
     <div class="hero-buttons">
-      <!-- <a class="btn btn-primary" href="#" aria-disabled="true">
+      <a class="btn btn-paper" href="https://arxiv.org/pdf/2606.18363" target="_blank" rel="noopener">
         <span class="btn-ico">PDF</span> Paper
-      </a> -->
-      <a class="btn btn-primary" href="#" aria-disabled="true">
+      </a>
+      <a class="btn btn-arxiv" href="https://arxiv.org/abs/2606.18363" target="_blank" rel="noopener">
         <span class="btn-ico">arX</span> arXiv
       </a>
-      <a class="btn" href="#" aria-disabled="true">
-        <span class="btn-ico">{ }</span> Code
+      <a class="btn btn-code" href="#" aria-disabled="true">
+        <span class="btn-ico">{ }</span> Code (coming soon)
       </a>
-      <a class="btn" href="#" aria-disabled="true">
-        <span class="btn-ico">▶</span> Video
+      <a class="btn btn-bibtex" href="#bibtex">
+        <span class="btn-ico">@</span> BibTeX
       </a>
     </div>
 
     <figure class="media hero-figure">
-      <img src="images/teaser.png" alt="Guava overview: harness-based embodied agent that uses tools for perception, planning, and control." />
-      <figcaption>
-        <strong>Guava overview.</strong> A harness combining iterative reasoning, semantic tools, and multimodal observations distills frontier-VLM capabilities into a compact 4B model deployable zero-shot in the real world.
-      </figcaption>
+      <video src="videos/guava_overview.mp4" poster="images/teaser.png" controls autoplay muted playsinline preload="metadata"></video>
     </figure>
   </section>
 
@@ -82,12 +79,12 @@
       </p>
     </div>
 
-    <!-- Optional hero video — drop the file in and unhide the figure.
     <figure class="media">
-      <video src="videos/overview.mp4" autoplay loop muted playsinline poster="images/teaser.png"></video>
-      <figcaption><strong>Project video.</strong> 60-second overview.</figcaption>
+      <img src="images/teaser.png" alt="Guava overview: harness-based embodied agent that uses tools for perception, planning, and control." />
+      <figcaption>
+        <strong>Guava overview.</strong> A harness combining iterative reasoning, semantic tools, and multimodal observations distills frontier-VLM capabilities into a compact 4B model deployable zero-shot in the real world.
+      </figcaption>
     </figure>
-    -->
   </section>
 
   <section id="ingredients" class="section">
@@ -126,6 +123,46 @@
     </figure>
 
     <h3 class="sub-title">Data gallery</h3>
+    <div class="video-grid three">
+      <figure class="media">
+        <video src="videos/can_in_bin_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>place the can in the box</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/pick_orange_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>pick up the orange</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/hotdog_near_donut_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>move the hotdog near the donut</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/cube_under_cup_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>pick up the hidden cube under the cup</figcaption>
+      </figure>
+
+      <figure class="media">
+        <video src="videos/push_basket_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>push basket to the left</figcaption>
+      </figure>
+            <figure class="media">
+        <video src="videos/remove_cube_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>remove the red cube from the tray</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/push_cereal_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>push cereal box to the left</figcaption>
+      </figure>
+
+      <figure class="media">
+        <video src="videos/open_drawer_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>open drawer</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="videos/set_table_sim.mp4" autoplay loop muted playsinline preload="metadata"></video>
+        <figcaption>set the table</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section id="results" class="section">
@@ -187,7 +224,7 @@
 
     <h3 class="sub-title">Failure recovery</h3>
     <p>
-      Guava interleaves observation, reasoning, and tool execution on every step — so when something goes wrong, the agent can <em>see</em> and revise the plan. We observe successful recovery from previously unseen failures, as recovery emerges from reasoning over execution feedback beyond memorizing predefined correction patterns.
+      Guava interleaves observation, reasoning, and tool execution on every step — so when something goes wrong, the agent can see and revise the plan. We observe successful recovery from previously unseen failures, as recovery emerges from reasoning over execution feedback beyond memorizing predefined correction patterns.
     </p>
 
     <div class="video-compare">
@@ -204,12 +241,12 @@
     <h3 class="sub-title">RL fine-tuning</h3>
     <div class="text-media-row">
       <p>
-        We further finetune Guava-Agent-4B GRPO on the two challenging long-horizon manipulation tasks that require substantially more multi-step reasoning, error recovery, and action planning. While the SFT policy struggles on both shell game (6.7%) and place all red objects in basket (0.0%), RL fine-tuning improves performance to 60.0% and 93.3%, respectively. The large gains suggest that training on challenging long-horizon tasks with sparse success rewards effectively strengthens recovery behaviors and enables the policy to better handle off-trajectory states.
+        We further finetune Guava-Agent-4B with GRPO on the two challenging, OOD long-horizon manipulation tasks that require substantially more multi-step reasoning, error recovery, and action planning. While the SFT policy struggles on both shell game (6.7%) and place all red objects in basket (0.0%), RL fine-tuning improves performance to 60.0% and 93.3%, respectively. The large gains suggest that training on challenging long-horizon tasks with sparse success rewards effectively strengthens recovery behaviors and enables the policy to better handle off-trajectory states.
       </p>
       <figure class="media">
         <img src="images/sft_vs_rl.png" alt="Comparison of SFT vs RL fine-tuning success rates on long-horizon tasks." />
         <figcaption>
-          GRPO on long-horizon tasks with sparse rewards substantially improves over the SFT baseline.
+          RL fine-tuning on long-horizon tasks with sparse rewards substantially improves over the SFT baseline.
         </figcaption>
       </figure>
     </div>
@@ -222,10 +259,15 @@
 
   <section id="bibtex" class="section">
     <h2 class="section-title">BibTeX</h2>
-    <div class="placeholder">
-      <p class="kicker">Citation</p>
-      <p>BibTeX will be added once the paper is published.</p>
-    </div>
+<pre class="bibtex-block"><code>@misc{liu2026guavaeffectiveuniversalharness,
+      title={Guava: An Effective and Universal Harness for Embodied Manipulation},
+      author={Haowen Liu and Xirui Li and Shaoxiong Yao and Peng Shi and Tianyi Zhou and Jia-Bin Huang and Furong Huang and Jiayuan Mao},
+      year={2026},
+      eprint={2606.18363},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2606.18363},
+}</code></pre>
   </section>
 
 </main>
