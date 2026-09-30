@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Guava: Effective and Universal Harness for Embodied Manipulation</title>
+<title>Guava: Distilling Frontier VLMs into a Compact Agent through a Robotic Manipulation Harness</title>
 <link rel="icon" type="image/png" href="images/red-guavas.png" />
-<meta name="description" content="Guava is a harness framework for embodied tool use, identifying three key ingredients for effective embodied agents and distilling them into a compact 4B model with fewer than 2K simulation trajectories." />
+<meta name="description" content="Guava distills frontier-VLM manipulation capabilities into a compact 4B agent using a shared robotic harness and simulation trajectories, approaching GPT-5.4 performance with lower inference latency and token usage." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
     <nav class="topnav">
       <a href="#overview">Overview</a>
       <a href="#ingredients">Harness</a>
-      <a href="#distillation">Guava-Agent-4B</a>
+      <a href="#distillation">Guava-4B</a>
       <a href="#results">Results</a>
     </nav>
   </div>
@@ -28,13 +28,13 @@
 <main id="top">
 
   <section class="hero">
-    <p class="eyebrow">A Harness Framework for Embodied Manipulation</p>
-    <h1 class="title"><img src="images/red-guavas.png" alt="" class="title-icon" />Guava: Effective and Universal Harness for Embodied Manipulation</h1>
+    <p class="eyebrow">Frontier manipulation capabilities. Compact local deployment.</p>
+    <h1 class="title"><img src="images/red-guavas.png" alt="" class="title-icon" />Guava: Distilling Frontier VLMs into a Compact Agent through a Robotic Manipulation Harness</h1>
 
     <div class="authors">
       <span class="author"><a href="https://hdacnw.github.io/" target="_blank" rel="noopener">Haowen Liu</a><sup>1,*</sup></span>
       <span class="author"><a href="https://xirui-li.github.io/" target="_blank" rel="noopener">Xirui Li</a><sup>1,*</sup></span>
-      <span class="author"><a href="https://shaoxiongyao.github.io/" target="_blank" rel="noopener">Shaoxiong Yao</a><sup>2</sup></span>
+      <span class="author"><a href="https://shaoxiongyao.github.io/" target="_blank" rel="noopener">Shaoxiong Yao</a><sup>2,*</sup></span>
       <span class="author"><a href="https://scholar.google.com/citations?user=XTbDLrkAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Peng Shi</a><sup>3</sup></span>
       <span class="author"><a href="https://tianyizhou.github.io/" target="_blank" rel="noopener">Tianyi Zhou</a><sup>4</sup></span>
       <span class="author"><a href="https://jbhuang0604.github.io/" target="_blank" rel="noopener">Jia-Bin Huang</a><sup>1</sup></span>
@@ -58,8 +58,8 @@
       <a class="btn btn-arxiv" href="https://arxiv.org/abs/2606.18363" target="_blank" rel="noopener">
         <span class="btn-ico">arX</span> arXiv
       </a>
-      <a class="btn btn-code" href="#" aria-disabled="true">
-        <span class="btn-ico">{ }</span> Code (coming soon)
+      <a class="btn btn-code" href="https://github.com/hdacnw/guava-release" target="_blank" rel="noopener">
+        <span class="btn-ico">{ }</span> Code
       </a>
       <a class="btn btn-bibtex" href="#bibtex">
         <span class="btn-ico">@</span> BibTeX
@@ -67,7 +67,7 @@
     </div>
 
     <figure class="media hero-figure">
-      <video src="videos/guava_overview.mp4" poster="images/teaser.png" controls autoplay muted playsinline preload="metadata"></video>
+      <video src="videos/guava_v3.mp4" controls autoplay muted playsinline preload="metadata"></video>
     </figure>
   </section>
 
@@ -75,50 +75,69 @@
     <h2 class="section-title">Overview</h2>
     <div class="lede">
       <p>
-        We present <strong class="hi-green">Guava</strong>, a harness framework for embodied tool use. Through systematic exploration of the design space, we identify three key ingredients of an effective harness: <mark class="hi-green">iterative perception–reasoning–action loops</mark>, <mark class="hi-orange">semantic action abstractions</mark>, and <mark class="hi-pink">multimodal observations</mark>. Using this harness, we distill embodied manipulation into a <strong class="hi-pink">4B open-source model</strong> with <strong class="hi-orange">fewer than 2K simulation trajectories</strong> — matching frontier proprietary models in both simulation and the real world, with strong <strong class="hi-green">zero-shot generalization</strong> to unseen objects, novel instructions, and long-horizon tasks.
+        Frontier vision–language models can reason about scenes, invoke robot tools, and adapt to execution feedback, but repeated model calls incur high costs and latency. <strong class="hi-green">Guava</strong> transfers these capabilities to a compact agent through a <mark class="hi-green">shared manipulation harness</mark> and <mark class="hi-orange">simulation-generated interaction data</mark>. Using GPT-5.4 as the teacher, we collect <strong class="hi-orange">just over 2,000 trajectories</strong> and fine-tune Qwen3.5-4B to obtain <strong class="hi-pink">Guava-4B</strong>. The compact agent approaches its frontier teacher across simulation, real-world, and external-benchmark evaluations, while substantially reducing inference latency and token usage.
       </p>
     </div>
 
     <figure class="media">
-      <img src="images/teaser.png" alt="Guava overview: harness-based embodied agent that uses tools for perception, planning, and control." />
+      <img src="images/guava_overview_arxiv.png" alt="Guava pipeline: a shared manipulation harness supports frontier-teacher trajectory generation in simulation and compact-agent deployment." />
       <figcaption>
-        <strong>Guava overview.</strong> A harness combining iterative reasoning, semantic tools, and multimodal observations distills frontier-VLM capabilities into a compact 4B model deployable zero-shot in the real world.
+        <strong>From frontier teacher to compact agent.</strong> A shared observation and action interface connects simulation-based teacher data generation with training and deployment of Guava-4B.
       </figcaption>
     </figure>
   </section>
 
   <section id="ingredients" class="section">
-    <h2 class="section-title">Ingredients for an effective harness</h2>
+    <h2 class="section-title">A shared manipulation harness</h2>
     <p class="section-lead">
-      Existing harness systems often rely on one-shot code generation, domain-specific pipelines coupled with powerful frontier models, which makes robust long-horizon behavior and failure recovery expensive and brittle. By exploring the design space of agent workflows, action spaces, and observation spaces, we reframe the design problem around three reusable ingredients that consistently matter for embodied manipulation:
+      The teacher and compact agent use the same observation, tool, and feedback interface. This lets teacher interaction histories serve directly as supervision for the student's subsequent decisions. We study three interface choices across GPT-5.4 and Qwen3.5-4B:
     </p>
 
     <ol class="principles">
       <li>
         <p class="p-title">Iterative perception–reasoning–action loops</p>
-        <p>ReAct-style loops let the agent adapt to execution outcomes and recover from failures, rather than committing to a single open-loop plan.</p>
+        <p>The full harness uses <strong>single-action replanning</strong>: a ReAct-style loop selects one action, executes it, then observes and replans. The <strong>multi-action replanning</strong> variant in the table instead generates a program of tool calls with simple control flow, executes it, then observes and generates another program if needed.</p>
       </li>
       <li>
         <p class="p-title">Semantic action abstractions</p>
-        <p>Tools that encapsulate manipulation skills at a semantic level free the language model to focus on task decomposition and planning instead of low-level control.</p>
+        <p>Object-referenced tools such as grasp and align encapsulate manipulation skills. The low-level comparison replaces semantic robot-control tools with a command specifying end-effector pose and gripper width.</p>
       </li>
       <li>
         <p class="p-title">Multimodal observations</p>
-        <p>Rich visual and structured observations provide the environmental context that embodied reasoning requires.</p>
+        <p>RGB images, numerical gripper state, and tool-response text expose execution outcomes. We compare this full feedback with image-only and image-plus-gripper-state observations.</p>
       </li>
     </ol>
+    <figure class="media harness-figure">
+      <img src="images/guava_harness_turn_arxiv.png" alt="One harness turn: image observation, numerical gripper state, and tool feedback inform the agent's reasoning and next semantic tool call." />
+      <figcaption><strong>One turn of the shared harness.</strong> The agent uses the current observation and interaction history to reason and select a semantic tool call. Execution returns updated feedback for the next turn.</figcaption>
+    </figure>
+    <div class="table-scroll">
+      <table class="results-table">
+        <caption>Harness study: success (%) on seven tasks, 15 trials per task.</caption>
+        <thead><tr><th scope="col">Harness configuration</th><th scope="col">GPT-5.4</th><th scope="col">Qwen3.5-4B</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Full (single-action replanning)</th><td><strong>88.6</strong></td><td><strong>22.9</strong></td></tr>
+          <tr><th scope="row">Image only</th><td>56.2</td><td>3.8</td></tr>
+          <tr><th scope="row">Image + gripper state</th><td>77.1</td><td>10.5</td></tr>
+          <tr><th scope="row">Low-level tools</th><td>73.3</td><td>4.8</td></tr>
+          <tr><th scope="row">Multi-action replanning</th><td>82.9</td><td>13.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The full harness performs best for both models. Frequent feedback is particularly helpful for the compact model, but its remaining performance gap motivates training beyond inference-time interface design.</p>
   </section>
 
   <section id="distillation" class="section">
-    <h2 class="section-title">Guava-Agent-4B</h2>
+    <h2 class="section-title">Training Guava-4B</h2>
     <p class="section-lead">
-      Building on these principles, we ask whether an effective harness can serve as a universal interface for embodied manipulation across model scales — including small open-source ones. We distill embodied tool-use behaviors into a small open-source model (Qwen3.5-4B), using fewer than 2K trajectories collected entirely in simulation and perform supervised fine-tuning.
+      GPT-5.4 generates interaction trajectories in randomized MuJoCo scenes through the shared harness. We also branch from saved states by injecting execution deviations, such as missed grasps or dropped objects, and retain successful recoveries. Simulator outcome labels undergo automated consistency checks and human visual review; supported annotation errors are corrected and unresolved episodes are excluded.
     </p>
+    <p>We fine-tune <strong>Qwen3.5-4B on the simulation trajectories</strong>, supervising the teacher's interleaved reasoning and tool calls in the context of observations and execution feedback. The resulting <strong>Guava-4B</strong> uses the same harness at deployment, without additional real-world fine-tuning.</p>
 
     <figure class="media">
-      <img src="images/data_engine.png" alt="Data generation pipeline: simulation environment, a frontier VLM, and the resulting reasoning + tool-call traces." />
+      <img src="images/guava_trajectories_arxiv.png" alt="A base trajectory and a perturbation branch showing an injected grasp slip followed by successful recovery." />
       <figcaption>
-        <strong>Data engine.</strong> Randomized simulation scenes plus error perturbations are paired with a frontier VLM. The pipeline yields interleaved reasoning and tool-call traces used to distill the 4B student model.
+        <strong>Base trajectories and recovery branches.</strong> A shared execution history branches into normal execution and an injected grasp slip followed by recovery. Successful simulation trajectories provide supervision for both task execution and adaptation.
       </figcaption>
     </figure>
 
@@ -168,17 +187,31 @@
   <section id="results" class="section">
     <h2 class="section-title">Results</h2>
     <p class="section-lead">
-      <strong>Guava-Agent-4B</strong> achieves the highest overall <strong>zero-shot real-world</strong> success rates on both in-distribution (86%) and out-of-distribution (92%) tasks, outperforming all baselines.
+      <strong>Guava-4B approaches GPT-5.4 performance</strong> while substantially outperforming its base model: <strong>87.1% success in simulation</strong> and <strong>90.0% in the real world</strong>, compared with 90.4% and 93.3% for GPT-5.4.
     </p>
+    <h3 class="sub-title">Simulation: capability transfer and generalization</h3>
+    <div class="table-scroll">
+      <table class="results-table">
+        <caption>Simulation success (%): 15 tasks, 30 trials per task. All models use the full harness. Best results are bold; second-best results are underlined.</caption>
+        <thead><tr><th scope="col">Task group</th><th scope="col">GPT-5.4</th><th scope="col">Qwen3.5-4B</th><th scope="col">Guava-4B</th><th scope="col">Guava-4B w/o perturbations</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Seen (7 tasks)</th><td><strong>86.7</strong></td><td>23.8</td><td><span class="second-best">82.9</span></td><td>81.9</td></tr>
+          <tr><th scope="row">Unseen (8 tasks)</th><td><strong>93.8</strong></td><td>20.8</td><td><span class="second-best">90.8</span></td><td>77.1</td></tr>
+          <tr><th scope="row">Overall</th><td><strong>90.4</strong></td><td>22.2</td><td><span class="second-best">87.1</span></td><td>79.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Unseen tasks test new objects, instructions, and long-horizon compositions. Including perturbation trajectories raises unseen-task success from <strong>77.1% to 90.8%</strong>.</p>
+    <h3 class="sub-title">Zero-shot real-world transfer</h3>
 
     <figure class="media">
-      <img src="images/real_world_comparison.png" alt="Bar chart comparing guava-agent-4b against CaP-Agent0, GPT 5.4, and Qwen3.5-4B on in-distribution and out-of-distribution real-world tasks." />
+      <img src="images/guava_realworld_arxiv.png" alt="Real-world task success for GPT-5.4, Qwen3.5-4B, and Guava-4B on seen and unseen tasks. Overall: 93.3%, 28.9%, and 90.0%, respectively." />
       <figcaption>
-        <strong>Real-world success rates.</strong> The 4B Guava agent matches or beats frontier proprietary models in average success across both in-distribution and OOD tasks, while running on a compact open-source backbone.
+        <strong>Real-world success rates.</strong> Ten trials per task across nine tasks, without real-world fine-tuning. Guava-4B achieves 90.0% overall success, approaching GPT-5.4 (93.3%) and exceeding Qwen3.5-4B (28.9%).
       </figcaption>
     </figure>
 
-    <p>Our method generalizes zero-shot across a broad range of tasks that requires <strong>semantic</strong> and <strong>geometric</strong> reasoning. It is able to handle <strong>long-horizon</strong> tasks, and is <strong>robust</strong> to distractors, OOD tasks and setups.</p>
+    <p>The rollouts below illustrate manipulation across object configurations, instructions, and task compositions.</p>
 
     <div class="video-grid three">
       <figure class="media">
@@ -224,29 +257,42 @@
 
     <h3 class="sub-title">Failure recovery</h3>
     <p>
-      Guava interleaves observation, reasoning, and tool execution on every step — so when something goes wrong, the agent can see and revise the plan. We observe successful recovery from previously unseen failures, as recovery emerges from reasoning over execution feedback beyond memorizing predefined correction patterns.
+      Qualitative examples illustrate feedback-conditioned adaptation. When an object is displaced before grasp execution, Guava retries using the updated scene. In the controller example, the gripper contacts the box rim during can placement, causing an abort consistent with a Cartesian collision reflex. The agent repositions horizontally to clear the obstruction and resumes placement. Unlike the missed grasps and displaced objects represented in training, this interruption comes from the physical robot's safety controller stopping motion in response to contact. The simulation data did not include this controller-specific failure, so the example illustrates adaptation to unfamiliar execution feedback.
     </p>
 
     <div class="video-compare">
       <figure class="media">
         <video src="videos/recovery_move.mp4" autoplay loop muted playsinline preload="metadata"></video>
-        <figcaption>When the carrot is moved during execution, Guava detects the displacement and re-attemps grasping</figcaption>
+        <figcaption>When the carrot is displaced before grasp execution, Guava observes the failed attempt and retries using the updated scene.</figcaption>
       </figure>
       <figure class="media">
         <video src="videos/recovery_control.mp4" autoplay loop muted playsinline preload="metadata"></video>
-        <figcaption>Guava recovers from unseen real-world control errors e.g., joint limits and unreachable poses by generating corrective actions before retrying</figcaption>
+        <figcaption>After box-rim contact triggers a controller abort during can placement, Guava moves the gripper sideways to clear the obstruction and resumes placement.</figcaption>
       </figure>
+    </div>
+
+    <h3 class="sub-title">Generalization to LIBERO-PRO</h3>
+    <p>Without benchmark-specific fine-tuning, Guava-4B retains much of its teacher's capability on LIBERO-PRO, an external benchmark testing changed object positions and task goals.</p>
+    <div class="table-scroll">
+      <table class="results-table">
+        <caption>LIBERO-PRO success rate (0–1), averaged across object, goal, and spatial suites. Best results are bold; second-best results are underlined. π<sub>0.5</sub> and CaP-Agent0 results are reported by CaP-X, as cited in the paper.</caption>
+        <thead><tr><th scope="col">Perturbation</th><th scope="col">GPT-5.4</th><th scope="col">Qwen3.5-4B</th><th scope="col">π<sub>0.5</sub></th><th scope="col">CaP-Agent0</th><th scope="col">Guava-4B</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Initial position</th><td><strong>0.45</strong></td><td>0.06</td><td>0.25</td><td>0.20</td><td><span class="second-best">0.41</span></td></tr>
+          <tr><th scope="row">Task instruction</th><td><strong>0.44</strong></td><td>0.03</td><td>0.01</td><td>0.16</td><td><span class="second-best">0.41</span></td></tr>
+        </tbody>
+      </table>
     </div>
 
     <h3 class="sub-title">RL fine-tuning</h3>
     <div class="text-media-row">
       <p>
-        We further finetune Guava-Agent-4B with GRPO on the two challenging, OOD long-horizon manipulation tasks that require substantially more multi-step reasoning, error recovery, and action planning. While the SFT policy struggles on both shell game (6.7%) and place all red objects in basket (0.0%), RL fine-tuning improves performance to 60.0% and 93.3%, respectively. The large gains suggest that training on challenging long-horizon tasks with sparse success rewards effectively strengthens recovery behaviors and enables the policy to better handle off-trajectory states.
+        Additional GRPO post-training improves success on shell game from <strong>63.3% to 90.0%</strong> and on placing all red objects in a basket from <strong>80.0% to 86.7%</strong>, over 30 trials per task. These results show further improvement on the two selected long-horizon tasks.
       </p>
       <figure class="media">
-        <img src="images/sft_vs_rl.png" alt="Comparison of SFT vs RL fine-tuning success rates on long-horizon tasks." />
+        <img src="images/guava_rl_arxiv.png" alt="SFT versus SFT plus GRPO: shell game 63.3% versus 90.0%; all red objects in basket 80.0% versus 86.7%." />
         <figcaption>
-          RL fine-tuning on long-horizon tasks with sparse rewards substantially improves over the SFT baseline.
+          Success before and after RL post-training on two long-horizon tasks, 30 trials each.
         </figcaption>
       </figure>
     </div>
@@ -257,10 +303,27 @@
   
 
 
+  <section id="efficiency" class="section">
+    <h2 class="section-title">Efficient local inference</h2>
+    <p class="section-lead">On a single <strong>RTX 5090</strong>, Guava-4B reduces mean model-call latency by <strong>7.10×</strong> and generated tokens per episode by <strong>66.7%</strong> relative to the GPT-5.4 API, while approaching the teacher's manipulation performance.</p>
+    <div class="table-scroll">
+      <table class="results-table">
+        <caption>Means over 30 episodes on three tasks per model; call latency is averaged over requests.</caption>
+        <thead><tr><th scope="col">Metric</th><th scope="col">GPT-5.4 API</th><th scope="col">Guava-4B (local)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Model-call latency (s)</th><td>4.168</td><td><strong>0.587</strong></td></tr>
+          <tr><th scope="row">Model-request time / episode (s)</th><td>42.10</td><td><strong>5.64</strong></td></tr>
+          <tr><th scope="row">Generated tokens / episode</th><td>2,389</td><td><strong>795</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Local inference reduces waiting time and token usage while retaining near-teacher performance. Timings cover model requests, not end-to-end robot execution.</p>
+  </section>
+
   <section id="bibtex" class="section">
     <h2 class="section-title">BibTeX</h2>
-<pre class="bibtex-block"><code>@misc{liu2026guavaeffectiveuniversalharness,
-      title={Guava: An Effective and Universal Harness for Embodied Manipulation},
+<pre class="bibtex-block"><code>@misc{liu2026guava,
+      title={Guava: Distilling Frontier VLMs into a Compact Agent through a Robotic Manipulation Harness},
       author={Haowen Liu and Xirui Li and Shaoxiong Yao and Peng Shi and Tianyi Zhou and Jia-Bin Huang and Furong Huang and Jiayuan Mao},
       year={2026},
       eprint={2606.18363},
