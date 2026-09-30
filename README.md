@@ -1,6 +1,6 @@
 # Guava project page
 
-Project page for **Guava: Effective and General Harness for Embodied Manipulation**.
+Project page for **Guava: Distilling Frontier VLMs into a Compact Agent through a Robotic Manipulation Harness**.
 
 Live at: <https://xirui-li.github.io/guava-website/>
 

@@ -695,3 +695,14 @@ a.cite:hover { text-decoration: underline; }
   .topbar-inner { padding: 12px 22px; }
   .topnav { gap: 16px; }
 }
+/* Accessible, horizontally scrollable result tables for the arXiv update. */
+.table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+.results-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.results-table caption { text-align: left; padding: 0 0 .75rem; color: #555; }
+.results-table th, .results-table td { padding: .75rem .9rem; border-bottom: 1px solid #e3e7e2; text-align: right; }
+.results-table th:first-child { text-align: left; }
+.results-table thead { background: #edf3e9; }
+.results-table tbody th { font-weight: 600; }
+.results-table tbody tr:nth-child(even) { background: #f8faf7; }
+.harness-figure { max-width: 400px; margin-left: auto; margin-right: auto; }
+.second-best { text-decoration: underline; text-underline-offset: 3px; }
